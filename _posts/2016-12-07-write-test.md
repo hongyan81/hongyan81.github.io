@@ -23,4 +23,3 @@ title: About the 502 problem (Nginx)
     ps -ef |grep php 
 
 
-time:2016-12-07
