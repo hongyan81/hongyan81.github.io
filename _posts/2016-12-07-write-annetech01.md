@@ -1,21 +1,17 @@
 ---
 layout: wp
-title: ¹ØÓÚ·ÃÎÊ·þÎñÆ÷(Nginx)·µ»Ø502´íÎó
+title: ¿¿¿¿¿¿¿(Nginx)¿¿502¿¿
 ---
 
-# ¹ØÓÚ·ÃÎÊ·þÎñÆ÷(Nginx)·µ»Ø502´íÎó
-<br />
-##ÆðÒò£º
- ÓÉÓÚÊ¹ÓÃYii2.0,ÐèÒªÉý¼¶php°æ±¾Îª5.4£¬Éý¼¶³É¹¦ºó£¬·ÃÎÊ±¾»úËùÓÐµÄÕ¾µã¶¼·µ»Ø502 Bad Gateway´íÎó
- <br />
-##ËµÃ÷£º
-    ºóÀ´¾Í¿ªÊ¼¸÷ÖÖ¶ÈÄï¡¢google,ÓÐµÄËµphp-cgi½ø³ÌÊý²»¹»£¬ÓÐµÄËµphp-fpmÅäÖÃµÄmax_childrenºÍmax_requestsÖµ²»¶Ô£¬ÉõÖÁ»¹ÓÐËµtimeoutÊ±¼ä
- ²»¶ÔµÄ£¬È»ºó·Ö±ð²é¿´ÁËngnixºÍphpµÄerrorlog,ÖØÆôN´ÎÎÞ¹û¡£
-    ×îºó·¢ÏÖÊÇphp-fpm.confµÄ¼àÌý¶Ë¿ÚÅäÖÃµÄÓëNginx¸÷¸öÕ¾µãÏÂµÄfastcgi_pass ÖÐµÄ¶Ë¿Ú²»Ò»ÖÂ¡£¸ÄÎªÒ»ÖÂºóÖØÆô·þÎñ£¬ÖÕÓÚ¿ÉÒÔÕý³£·ÃÎÊÁË¡£
- <br />
- ##±¸×¢£º
- 1¡¢ÈçºÎ²é¿´µ±Ç°php-cgi½ø³Ì 
-    ps -ef |grep php 
+# ¿¿¿¿¿¿¿(Nginx)¿¿502¿¿
+<br/>
+##¿¿
+   ¿¿¿¿Yii2.0,¿¿¿¿php¿¿¿5.4¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿502 Bad Gateway¿¿
+##¿¿
+   ¿¿¿¿¿¿¿¿¿¿google,¿¿¿php-cgi¿¿¿¿¿¿¿¿¿php-fpm¿¿¿max_children¿max_requests¿¿¿¿¿¿¿¿¿timeout¿¿¿¿¿¿¿¿¿¿¿¿¿ngnix¿php¿errorlog,¿¿N¿¿¿¿
+    ¿¿¿¿¿php-fpm.conf¿¿¿¿¿¿¿¿¿Nginx¿¿¿¿¿¿fastcgi_pass ¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿
+##¿¿
+    ¿¿php-cgi¿¿¿¿¿¿¿¿php-fpm¿¿¿¿¿¿¿php-cgi¿¿¿¿¿ps -ef |grep php 
 
 
 time:2016-12-07
