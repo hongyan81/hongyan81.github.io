@@ -1,6 +1,6 @@
 ---
 layout: wp
-title: 关于访问服务器(Nginx)返回502错误
+title: About the 502 problem (Nginx)
 ---
 
 # 关于访问服务器(Nginx) 返回502错误
