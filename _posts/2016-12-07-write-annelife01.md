@@ -1,6 +1,6 @@
 ---
 layout: wp
-title: start my new study life
+title: test blog on git hub
 ---
 
 # 今天亮仔帮忙搭建了个blog在github上
