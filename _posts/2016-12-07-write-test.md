@@ -20,7 +20,7 @@ title: 关于访问服务器(Nginx)返回502错误
 ## 备注： 
 
  1、如何查看当前php-cgi进程（郭大侠说php-fpm的数量就能代表php-cgi的，我得研究下为啥）
- <br/>
+ <br />
  ps -ef |grep php 
 
 
