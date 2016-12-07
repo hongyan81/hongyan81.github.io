@@ -14,6 +14,7 @@ I must try my best to improve my ability on it.
 	I hope i can use the linux as like as an monky in the near future
 
 * Thanks for Mr. Guo's help.
+* Thanks for Mr. Guo's help.
 
 
 
