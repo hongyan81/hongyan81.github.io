@@ -11,6 +11,7 @@ title: About the 502 problem (Nginx)
  由于使用Yii2.0,需要升级php版本为5.4，升级成功后，访问本机所有的站点都返回502 Bad Gateway错误
  <br />
 
+
 ## 说明：
     后来就开始各种度娘、google,有的说php-cgi进程数不够，有的说php-fpm配置的max_children和max_requests值不对，甚至还有说timeout时间
  不对的，然后分别查看了ngnix和php的errorlog,重启N次无果。
