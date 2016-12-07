@@ -1,7 +1,12 @@
 ---
 layout: wp
-title: start my new study life
+title: 关于访问服务器返回502错误
 ---
+
+# 关于访问服务器返回502错误
+
+由于使用了YII2.0,需要php5.4以上的版本，升级php完成后，原来所有的站点访问 都有以下错误提示
+
 
 time:2016-12-07
 
