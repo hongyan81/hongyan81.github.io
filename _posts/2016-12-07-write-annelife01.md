@@ -3,7 +3,7 @@ layout: wp
 title: test blog on git hub
 ---
 
-# 今天亮仔帮忙搭建了个blog在github上
+# Mr. guo help me bulild a blog on github
 
 
 	I am so happy about this. But i'm so shy about my linux leavel.
