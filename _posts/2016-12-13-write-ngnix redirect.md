@@ -4,7 +4,7 @@ title: about nginx rewrite
 ---   
 
 
-# <font color="#003D79" size=6 face=“黑体”>基于Nginx服务器的重定向问题（为什么入口是index.php）</font>
+# 基于Nginx服务器的重定向问题（为什么入口是index.php）
 
 ## 一、首先有几个前置说明
 
@@ -58,12 +58,12 @@ root /home/work/data/www/myweb/web;
 ### 现象
 
 .a 无论直接访问顶级域名还是不存在的目录都返回了site目录下的index页 <br>
-访问 http://www.myweb.cn : <font color=red  face=“黑体”>输出欢迎（返回的site目录下的index）</font> <br>
-访问不存在的目录 http://www.myweb.cn/aa : <font color=red  face=“黑体”>输出欢迎（返回的site目录下的index）</font> <br>
+访问 http://www.myweb.cn : 输出欢迎（返回的site目录下的index） <br>
+访问不存在的目录 http://www.myweb.cn/aa : 输出欢迎（返回的site目录下的index） <br>
 
 .b 直接用域名访问web目录下的index2,无法正常访问，返回错误页 <br>
-访问 http://www.myweb.cn/index2.php ： <font color=red  face=“黑体”>无法正常访问，返回错误页</font> <br>
-访问 http://www.myweb.cn/web/index2.php ： <font color=red size=4 face=“黑体”>依旧输出欢迎（返回的site目录下的index）</font> <br>
+访问 http://www.myweb.cn/index2.php ： 无法正常访问，返回错误页 <br>
+访问 http://www.myweb.cn/web/index2.php ： 依旧输出欢迎（返回的site目录下的index）<br>
  
 .c 访问http://www.myweb.cn/web/index.php?r=tmalltrade  返回正确业务页面 <br>
 访问 http://www.myweb.cn/web/?r=tmalltrade      返回正确业务页面,页面同以上链接 <br>
@@ -89,8 +89,8 @@ root /home/work/data/www/myweb/web;
 .现象c
 	同现象a，配置了root的目录，同时yii框架匹配到了相应的controler
 
-<font color=red  face=“黑体”>另外，我把rewrite相关内容注释掉，直接返回了No input file specified，这就是因为nginx的运行机制
-下面location又没有适合的分发规则，所以nginx直接报错了</font> <br>
+另外，我把rewrite相关内容注释掉，直接返回了No input file specified，这就是因为nginx的运行机制
+下面location又没有适合的分发规则，所以nginx直接报错了<br>
 
 
 ## 三、尝试更改nginx配置，使用try_files替换rewrite
@@ -101,7 +101,7 @@ root /home/work/data/www/myweb/web;
 try_files $uri $uri/ /index.php;
 
 继续更改配置如下，同时在web目录下去掉index2，增加index3页面<br>
-<font color=red  face=“黑体”>此时输出了index3的信息，因为按照顺寻匹配到了index3</font> <br>
+此时输出了index3的信息，因为按照顺寻匹配到了index3 <br>
 try_files $uri $uri/index2.php $uri/index3.php;
 
 
