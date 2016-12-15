@@ -4,7 +4,7 @@ title: about nginx rewrite
 ---   
 
 
-# 基于Nginx服务器的重定向问题
+# <font color="#003D79" size=6 face=“黑体”>基于Nginx服务器的重定向问题（为什么入口是index.php）</font>
 
 ## 一、首先有几个前置说明
 
@@ -36,20 +36,16 @@ Nginx在运行时，至少必须加载几个核心模块和一个事件类模块
 
 ## 二、关于我的项目说明和重定向的问题
 
-我的项目:Myweb
-根目录下有个简单的index页（输出“hellow”）
-web目录下同样有个index页，是Yii框架的入口文件
+### 我的项目:Myweb（YII框架2.0）
 
-现象：
-访问 http://www.myweb.cn ， 返回根目录的index页
-访问不存在的目录 http://www.myweb.cn/aa ，返回根目录的index页
-访问http://www.myweb.cn/web/index.php?r=tmalltrade  返回正确业务页面
-访问 http://www.myweb.cn/web/?r=tmalltrade     返回同上页面
+项目根目录：index页
+web目录：有index.php（yii框架的入口脚本，没有任何输出）、index2.php(输出 你好)
+site目录:有index.php （输出欢迎）
 
-原因：
-nginix在处理http请求的时候，会进行分发,根据nginx。conf内http模块下server内的相关配置，匹配虚拟主机以及其他相应配置规则
 
-我这里配置了（在location外面写的）
+### nginx.conf配置如下
+
+root /home/work/data/www/myweb/web;
 
 ```
 
@@ -59,5 +55,69 @@ nginix在处理http请求的时候，会进行分发,根据nginx。conf内http�
 
 ```
 
+### 现象
 
-当前目录不存在时，会指向上级目录下的index.php文件，然后跳出，不在匹配下面的规则
+.a 无论直接访问顶级域名还是不存在的目录都返回了site目录下的index页 <br>
+访问 http://www.myweb.cn : <font color=red  face=“黑体”>输出欢迎（返回的site目录下的index）</font> <br>
+访问不存在的目录 http://www.myweb.cn/aa : <font color=red  face=“黑体”>输出欢迎（返回的site目录下的index）</font> <br>
+
+.b 直接用域名访问web目录下的index2,无法正常访问，返回错误页 <br>
+访问 http://www.myweb.cn/index2.php ： <font color=red  face=“黑体”>无法正常访问，返回错误页</font> <br>
+访问 http://www.myweb.cn/web/index2.php ： <font color=red size=4 face=“黑体”>依旧输出欢迎（返回的site目录下的index）</font> <br>
+ 
+.c 访问http://www.myweb.cn/web/index.php?r=tmalltrade  返回正确业务页面 <br>
+访问 http://www.myweb.cn/web/?r=tmalltrade      返回正确业务页面,页面同以上链接 <br>
+访问 http://www.myweb.cn/?r=tmalltrade      返回正确业务页面,页面同以上链接<br>
+
+
+原因：<br>
+.现象a<br>
+	因为root配置的路径为/home/work/data/www/myweb/web，所以直接访问域名时，先访问的是web下的index，然后yii框架指向了site目录下的index
+	做了如下配置了（在location外面写的）,所以依旧输出了欢迎
+
+```
+
+    if (!-e $request_filename){
+        rewrite ^/(.+)$ /index.php break;当前目录不存在时，会指向上级目录下的index.php文件，然后跳出，不在匹配下面的规则
+    }
+
+```
+
+.现象b<br>
+	同上，因为配置了root的目录为web，所以域名+index2 =  http://www.myweb.cn/web/index2.php, 实际是不存的
+
+.现象c
+	同现象a，配置了root的目录，同时yii框架匹配到了相应的controler
+
+<font color=red  face=“黑体”>另外，我把rewrite相关内容注释掉，直接返回了No input file specified，这就是因为nginx的运行机制
+下面location又没有适合的分发规则，所以nginx直接报错了</font> <br>
+
+
+## 三、尝试更改nginx配置，使用try_files替换rewrite
+
+注释掉rewrite相关配置后，ngnixn会因为没有相应的分发规则而返回了No input file specified<br>
+这时使用try_files如下，达到了和rewrite一样的效果
+
+try_files $uri $uri/ /index.php;
+
+继续更改配置如下，同时在web目录下去掉index2，增加index3页面<br>
+<font color=red  face=“黑体”>此时输出了index3的信息，因为按照顺寻匹配到了index3</font> <br>
+try_files $uri $uri/index2.php $uri/index3.php;
+
+
+### 备注：
+
+try_files
+
+语法: try_files file ... uri 或 try_files file ... = code
+
+默认值: 无
+
+作用域: server location
+
+按顺序检查文件是否存在，返回第一个找到的文件。结尾的斜线表示为文件夹 -$uri/。如果所有的文件都找不到，会进行一个内部重定向到最后一个参数。
+
+务必确认只有最后一个参数可以引起一个内部重定向，之前的参数只设置内部URI的指向。 最后一个参数是回退URI且必须存在，否则将会出现内部500错误。
+
+命名的location也可以使用在最后一个参数中。与rewrite指令不同，如果回退URI不是命名的location那么$args不会自动保留，如果你想保留$args，必须明确声明。
+
